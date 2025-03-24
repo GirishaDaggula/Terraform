@@ -18,7 +18,7 @@ steps:
       - '--container-image=gcr.io/$PROJECT_ID/my-flask-app:$COMMIT_SHA'
 
 # Specify the logs bucket for Cloud Build
-logs_bucket: gs://your-logs-bucket-name
+logs_bucket: gs://daggula-bucket
 
 substitutions:
   _COMMIT_SHA: "${SHORT_SHA}"

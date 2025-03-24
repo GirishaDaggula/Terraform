@@ -17,6 +17,9 @@ steps:
       - '--zone=us-central1-a'
       - '--container-image=gcr.io/$PROJECT_ID/my-flask-app:$COMMIT_SHA'
 
-# Substitutes the $COMMIT_SHA value with the Git commit ID.
+# Specify the logs bucket for Cloud Build
+logs_bucket: gs://your-logs-bucket-name
+
 substitutions:
   _COMMIT_SHA: "${SHORT_SHA}"
+

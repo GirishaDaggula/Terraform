@@ -11,3 +11,6 @@ steps:
       - 'daggula-flask-instance'
       - '--zone=us-central1-a'
       - '--container-image=gcr.io/$PROJECT_ID/my-flask-app:$COMMIT_SHA'
+
+substitutions:
+  _COMMIT_SHA: "${SHORT_SHA}"

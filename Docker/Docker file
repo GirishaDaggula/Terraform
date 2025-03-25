@@ -1,13 +1,8 @@
 steps:
-  # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'gcr.io/$PROJECT_ID/my-flask-app:$COMMIT_SHA', '.']
-
-  # Step 2: Push the Docker image to Artifact Registry
+    args: ['build', '-f', 'docker/Dockerfile', '-t', 'gcr.io/$PROJECT_ID/my-flask-app:$COMMIT_SHA', '.']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/my-flask-app:$COMMIT_SHA']
-
-  # Step 3: Deploy the Docker image to the Compute Engine instance
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'compute'
@@ -16,9 +11,3 @@ steps:
       - 'daggula-flask-instance'
       - '--zone=us-central1-a'
       - '--container-image=gcr.io/$PROJECT_ID/my-flask-app:$COMMIT_SHA'
-
-# Specify the logs bucket for Cloud Build
-logs_bucket: gs://daggula-bucket
-
-substitutions:
-  _COMMIT_SHA: "${SHORT_SHA}"
